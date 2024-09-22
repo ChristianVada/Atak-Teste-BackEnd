@@ -1,9 +1,11 @@
 ﻿using Atak2.Models;
 using Atak2.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Atak2.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class AutenticacaoController : ControllerBase

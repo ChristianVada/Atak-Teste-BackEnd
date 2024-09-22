@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Atak2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3edbe6134da6b3fde036435060c7ec4ea2988513")]
 [assembly: System.Reflection.AssemblyProductAttribute("Atak2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Atak2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

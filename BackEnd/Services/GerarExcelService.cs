@@ -43,7 +43,7 @@ namespace Atak2.Services
                 {
                     Nome = $"Cliente {i + 1}",
                     Email = $"cliente{i + 1}@exemplo.com",
-                    Telefone = $"(11) 9{rand.Next(1000, 9999)}-{rand.Next(1000, 9999)}",
+                    Telefone = $"(44) 9{rand.Next(1000, 9999)}-{rand.Next(1000, 9999)}",
                     DataNascimento = new DateTime(rand.Next(1950, 2000), rand.Next(1, 12), rand.Next(1, 28))
                 });
             }

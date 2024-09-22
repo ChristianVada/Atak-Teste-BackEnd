@@ -1,9 +1,11 @@
 ﻿using Atak2.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Atak2.Controllers
 {
+    [EnableCors("MyPolicy")]
     [ApiController]
     [Route("api/[controller]")]
     public class ExcelController : ControllerBase
