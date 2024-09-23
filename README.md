@@ -21,3 +21,4 @@ Para rodar este projeto, é necessário ter o **.NET SDK 8.0** instalado.
 ### Observações
 * O banco de dados SQLite já está incluído no repositório, então não há necessidade de rodar migrações.
 * Lembre de configure o CORS no arquivo Program.cs para permitir a comunicação entre as aplicações.
+* Link do Front: <https://github.com/ChristianVada/Atak-Teste-FrontEnd>
