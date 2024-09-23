@@ -8,7 +8,7 @@ Este projeto é parte de um teste que gera dados fictícios de clientes em uma p
 - **JWT** para autenticação
 
 ### Requisitos
-Para rodar este projeto, é necessário ter o **.NET SDK 8.0** instalado. Você pode verificar se ele está instalado executando o seguinte comando no terminal:
+Para rodar este projeto, é necessário ter o **.NET SDK 8.0** instalado.
 
 ### Instalação e Execução
 1. Clone o repositório
