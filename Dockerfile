@@ -18,3 +18,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Atak2.dll"]
+CMD ["dotnet", "Atak2.dll", "migrate"]
