@@ -15,7 +15,7 @@ Para rodar este projeto, é necessário ter o **.NET SDK 8.0** instalado.
 2. Acesse o diretório
 3. Restaure as dependências: ```dotnet restore```
 4. Configurações adicionais:
-  O arquivo appsettings.json já está configurado, porém, você pode precisar ajustar a URL que conecta o frontend ao backend. Para isso, abra o arquivo Program.cs e adicione a URL do frontend ao configurar as políticas de CORS.
+  O arquivo ```appsettings.json``` já está configurado, porém, você pode precisar ajustar a URL que conecta o frontend ao backend. Para isso, abra o arquivo Program.cs e adicione a URL do frontend ao configurar as políticas de CORS.
 5. Rodar a aplicação: ```dotnet run```
 
 ### Observações
