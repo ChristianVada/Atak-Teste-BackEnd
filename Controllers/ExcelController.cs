@@ -1,4 +1,5 @@
-﻿using Atak2.Services;
+﻿using Atak2.Models;
+using Atak2.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -21,16 +22,16 @@ namespace Atak2.Controllers
 
         [Authorize]
         [HttpPost("enviar-email")]
-        public async Task<IActionResult> EnviarEmail([FromQuery] int quantidade)
+        public async Task<IActionResult> EnviarEmail(DadosEmailModel dadosEmail)
         {
-            if (quantidade < 10 || quantidade > 1000)
-                return BadRequest("A quantidade deve ser entre 10 e 1000.");
+            if (dadosEmail.Quantidade <= 10 || dadosEmail.Quantidade >= 1000)
+                return BadRequest("A quantidade deve ser de no minímo 10 e no máximo 1000.");
 
             try
             {
-                var arquivoExcel = await _gerarExcelService.GerarArquivoExcelAsync(quantidade);
+                var arquivoExcel = await _gerarExcelService.GerarArquivoExcelAsync(dadosEmail.Quantidade);
 
-                await _emailService.EnviarEmailComAnexoAsync(arquivoExcel);
+                await _emailService.EnviarEmailComAnexoAsync(arquivoExcel, dadosEmail);
 
                 return Ok("Email enviado com sucesso.");
             }
@@ -39,16 +40,5 @@ namespace Atak2.Controllers
                 return StatusCode(500, $"Erro ao enviar e-mail: {ex.Message}");
             }
         }
-
-        //[Authorize]
-        //[HttpPost("gerar-excel")]
-        //public async Task<IActionResult> GerarExcel([FromQuery] int quantidade)
-        //{
-        //    if (quantidade <= 10 || quantidade >= 1000)
-        //        return BadRequest("A quantidade deve ser no mínimo 10 e no máximo 1000.");
-
-        //    var arquivoExcel = await _gerarExcelService.GerarArquivoExcelAsync(quantidade);
-        //    return File(arquivoExcel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "clientes.xlsx");
-        //}
     }
 }

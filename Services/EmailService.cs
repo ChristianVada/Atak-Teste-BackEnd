@@ -1,5 +1,6 @@
 ﻿using MimeKit;
 using MailKit.Net.Smtp;
+using Atak2.Models;
 
 namespace Atak2.Services
 {
@@ -7,38 +8,30 @@ namespace Atak2.Services
     {
         private readonly IConfiguration _configuracao;
 
-        private string assunto = "Gerador de dados Atak Teste - Dados Gerados";
-        private string corpo = "Este é um projeto de geração de dados fictícios. Confira o código no repositório: https://github.com/seu-repositorio";
-        private string destinatario = "christianryuji@hotmail.com";
-        private string nomeArquivo = "clientes.xlsx";
-
         public EmailService(IConfiguration configuracao)
         {
             _configuracao = configuracao;
         }
 
-        public async Task EnviarEmailComAnexoAsync(byte[] arquivo)
+        public async Task EnviarEmailComAnexoAsync(byte[] arquivo, DadosEmailModel dadosEmail)
         {
             var mensagem = new MimeMessage();
-            mensagem.From.Add(new MailboxAddress("[Nome do Projeto]", _configuracao["Email:De"]));
-            mensagem.To.Add(new MailboxAddress("dest",destinatario));
-            mensagem.Subject = assunto;
+            mensagem.From.Add(new MailboxAddress("Atak Teste Gerador", _configuracao["Email:De"]));
+            mensagem.To.Add(new MailboxAddress("", dadosEmail.Destinatario));
+            mensagem.Subject = dadosEmail.Assunto;
 
-            // Corpo do e-mail (Texto)
             var corpoDoTexto = new BodyBuilder
             {
-                TextBody = corpo
+                TextBody = dadosEmail.CorpoEmail
             };
 
-            // Anexar o arquivo Excel
             using (var stream = new MemoryStream(arquivo))
             {
-                corpoDoTexto.Attachments.Add(nomeArquivo, stream.ToArray(), new ContentType("application", "vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+                corpoDoTexto.Attachments.Add("clientes-gerados.xlsx", stream.ToArray(), new ContentType("application", "vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
             }
 
             mensagem.Body = corpoDoTexto.ToMessageBody();
 
-            // Configura o cliente SMTP (utilizando MailKit)
             using (var cliente = new SmtpClient())
             {
                 try
@@ -48,10 +41,10 @@ namespace Atak2.Services
                     var smtpUser = _configuracao["Email:SmtpUser"];
                     var smtpPass = _configuracao["Email:SmtpPass"];
 
-                    await cliente.ConnectAsync(smtpHost, smtpPort, true); // Conectar ao servidor SMTP
-                    await cliente.AuthenticateAsync(smtpUser, smtpPass);  // Autenticação
-                    await cliente.SendAsync(mensagem);                    // Enviar e-mail
-                    await cliente.DisconnectAsync(true);                  // Desconectar
+                    await cliente.ConnectAsync(smtpHost, smtpPort, true);
+                    await cliente.AuthenticateAsync(smtpUser, smtpPass);
+                    await cliente.SendAsync(mensagem);
+                    await cliente.DisconnectAsync(true);
                 }
                 catch (Exception ex)
                 {
